@@ -412,14 +412,20 @@
 }
 
 @media (max-width: 768px) {
+  .hero {
+    min-height: auto;
+    padding-bottom: var(--space-xl);
+  }
+
   .heroInner {
     grid-template-columns: 1fr;
     text-align: center;
-    padding: var(--space-lg) var(--space-md);
+    padding: var(--space-md) var(--space-md) var(--space-lg);
+    gap: var(--space-md);
   }
 
   .heroTitle {
-    font-size: 1.75rem;
+    font-size: 1.6rem;
     line-height: 1.2;
   }
 
@@ -428,17 +434,23 @@
   }
 
   .heroDesc {
-    margin: 0 auto var(--space-xl);
-    font-size: 0.95rem;
+    margin: 0 auto var(--space-md);
+    font-size: 0.88rem;
+    line-height: 1.6;
   }
 
   .heroCta {
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
   }
 
   .heroCta .btn {
-    font-size: 0.82rem;
-    padding: var(--space-xs) var(--space-md);
+    font-size: 0.85rem;
+    padding: var(--space-sm) var(--space-xl);
+    width: 100%;
+    max-width: 280px;
   }
 
   .heroVisual {
@@ -446,17 +458,21 @@
   }
 
   .trophy {
-    font-size: 5rem;
+    font-size: 4rem;
   }
 
   .trophyGlow {
-    width: 150px;
-    height: 150px;
+    width: 120px;
+    height: 120px;
   }
 
   .heroBadge {
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     padding: 4px 12px;
+  }
+
+  .heroWave {
+    height: 40px;
   }
 
   .statsGrid {
