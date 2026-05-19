@@ -149,6 +149,8 @@
   border-radius: var(--radius-full);
   font-size: 0.72rem;
   font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .cardName {
@@ -249,12 +251,26 @@
 }
 
 @media (max-width: 768px) {
+  .header {
+    padding: var(--space-lg) 0 var(--space-md);
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .subtitle {
+    font-size: 0.9rem;
+  }
+
   .grid {
     grid-template-columns: 1fr;
+    gap: var(--space-md);
   }
 
   .filterBar {
     flex-direction: column;
+    gap: var(--space-sm);
   }
 
   .searchInput {
@@ -265,5 +281,55 @@
     width: 100%;
     overflow-x: auto;
     padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .filterBtn {
+    font-size: 0.75rem;
+    padding: var(--space-xs) var(--space-sm);
+  }
+
+  .cardHeader {
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    padding: var(--space-sm) var(--space-md) 0;
+  }
+
+  .cardName {
+    font-size: 1rem;
+    padding: var(--space-sm) var(--space-md) 0;
+  }
+
+  .cardUrdu {
+    font-size: 0.82rem;
+    padding: 2px var(--space-md) 0;
+  }
+
+  .cardDate {
+    padding: var(--space-xs) var(--space-md);
+  }
+
+  .cardStats {
+    padding: var(--space-sm) var(--space-md);
+    margin: 0 var(--space-md);
+  }
+
+  .cardStatVal {
+    font-size: 0.95rem;
+  }
+
+  .cardTimings {
+    padding: var(--space-xs) var(--space-md);
+    font-size: 0.78rem;
+  }
+
+  .cardArrow {
+    opacity: 1;
+    padding: var(--space-xs) var(--space-md) var(--space-sm);
+    font-size: 0.8rem;
+  }
+
+  .emptyState {
+    padding: var(--space-xl);
   }
 }

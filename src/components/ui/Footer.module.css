@@ -123,11 +123,33 @@
 @media (max-width: 768px) {
   .inner {
     grid-template-columns: 1fr;
-    gap: var(--space-xl);
+    gap: var(--space-lg);
+    text-align: center;
   }
 
   .desc {
     max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .links {
+    align-items: center;
+  }
+
+  .whatsappLink {
+    margin: var(--space-xs) auto 0;
+  }
+
+  .colTitle {
+    font-size: 0.9rem;
+  }
+
+  .logo {
+    justify-content: center;
+  }
+
+  .bottom {
+    font-size: 0.75rem;
   }
 }
 
@@ -137,3 +159,4 @@
     gap: var(--space-xl);
   }
 }
+

@@ -60,9 +60,9 @@
 }
 
 .heroTitle {
-  font-size: clamp(2rem, 5vw, 3.8rem);
+  font-size: clamp(1.6rem, 5vw, 3.8rem);
   font-weight: 900;
-  line-height: 1.1;
+  line-height: 1.15;
   letter-spacing: -0.02em;
   margin-bottom: var(--space-lg);
   word-wrap: break-word;
@@ -75,6 +75,7 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  display: inline;
 }
 
 .heroDesc {
@@ -321,6 +322,7 @@
   font-size: 0.72rem;
   font-weight: 600;
   color: var(--text-secondary);
+  white-space: nowrap;
 }
 
 .tournName {
@@ -413,15 +415,30 @@
   .heroInner {
     grid-template-columns: 1fr;
     text-align: center;
-    padding: var(--space-xl) var(--space-md);
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .heroTitle {
+    font-size: 1.75rem;
+    line-height: 1.2;
+  }
+
+  .heroAccent {
+    display: inline;
   }
 
   .heroDesc {
     margin: 0 auto var(--space-xl);
+    font-size: 0.95rem;
   }
 
   .heroCta {
     justify-content: center;
+  }
+
+  .heroCta .btn {
+    font-size: 0.82rem;
+    padding: var(--space-xs) var(--space-md);
   }
 
   .heroVisual {
@@ -429,11 +446,34 @@
   }
 
   .trophy {
-    font-size: 7rem;
+    font-size: 5rem;
+  }
+
+  .trophyGlow {
+    width: 150px;
+    height: 150px;
+  }
+
+  .heroBadge {
+    font-size: 0.75rem;
+    padding: 4px 12px;
   }
 
   .statsGrid {
     grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-sm);
+  }
+
+  .statCard {
+    padding: var(--space-md) var(--space-sm);
+  }
+
+  .statValue {
+    font-size: 1.4rem;
+  }
+
+  .statLabel {
+    font-size: 0.72rem;
   }
 
   .compGrid {
@@ -444,8 +484,25 @@
     grid-template-columns: 1fr;
   }
 
+  .tournHeader {
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+  }
+
+  .tournType {
+    font-size: 0.68rem;
+  }
+
   .ctaCard {
-    padding: var(--space-xl);
+    padding: var(--space-lg);
+  }
+
+  .ctaTitle {
+    font-size: 1.2rem;
+  }
+
+  .ctaDesc {
+    font-size: 0.9rem;
   }
 
   .tournUrdu {
@@ -454,12 +511,21 @@
 }
 
 @media (max-width: 480px) {
+  .heroTitle {
+    font-size: 1.5rem;
+  }
+
   .compGrid {
     grid-template-columns: 1fr;
   }
 
   .statsGrid {
     grid-template-columns: 1fr 1fr;
-    gap: var(--space-md);
+    gap: var(--space-sm);
+  }
+
+  .hero {
+    min-height: auto;
+    padding-bottom: var(--space-xl);
   }
 }
