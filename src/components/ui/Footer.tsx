@@ -10,40 +10,6 @@ export default function Footer() {
     <footer className={styles.footer}>
       <div className={`container ${styles.inner}`}>
         <div className={styles.col}>
-          <div className={styles.logo}>
-            <span className={styles.logoIcon}>🏆</span>
-            <div>
-              <strong className={styles.logoTitle}>Super Diamond</strong>
-              <span className={styles.logoSub}>Champions Trophy</span>
-            </div>
-          </div>
-          <p className={styles.desc}>
-            {t("footer.desc")}
-          </p>
-        </div>
-
-        <div className={styles.col}>
-          <h4 className={styles.colTitle}>{t("footer.quickLinks")}</h4>
-          <nav className={styles.links}>
-            <a href="/">{t("nav.home")}</a>
-            <a href="/tournaments">{t("nav.tournaments")}</a>
-            <a href="/about">{t("nav.about")}</a>
-            <a href="/contact">{t("nav.contact")}</a>
-          </nav>
-        </div>
-
-        <div className={styles.col}>
-          <h4 className={styles.colTitle}>{t("footer.competitions")}</h4>
-          <nav className={styles.links}>
-            <a href="/tournaments">{t("comp.1day")}</a>
-            <a href="/tournaments">{t("comp.3day")}</a>
-            <a href="/tournaments">{t("comp.5day")}</a>
-            <a href="/tournaments">{t("comp.11day")}</a>
-            <a href="/tournaments">{t("comp.15pigeon")}</a>
-          </nav>
-        </div>
-
-        <div className={styles.col}>
           <h4 className={styles.colTitle}>{t("footer.contact")}</h4>
           <nav className={styles.links}>
             <span>📧 info@superdiamondtrophy.com</span>

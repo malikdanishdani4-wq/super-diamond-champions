@@ -6,52 +6,17 @@
 }
 
 .inner {
-  display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr 1fr;
-  gap: var(--space-2xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-xl);
 }
 
 .col {
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: var(--space-sm);
-  margin-bottom: var(--space-sm);
-}
-
-.logoIcon {
-  font-size: 2rem;
-}
-
-.logoTitle {
-  font-weight: 800;
-  font-size: 1.2rem;
-  background: linear-gradient(135deg, var(--gold), var(--gold-light));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  display: block;
-}
-
-.logoSub {
-  font-size: 0.75rem;
-  font-weight: 500;
-  color: var(--text-secondary);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  display: block;
-}
-
-.desc {
-  color: var(--text-secondary);
-  font-size: 0.9rem;
-  line-height: 1.7;
-  max-width: 300px;
 }
 
 .colTitle {
@@ -64,6 +29,7 @@
 .links {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: var(--space-sm);
 }
 
@@ -122,18 +88,7 @@
 
 @media (max-width: 768px) {
   .inner {
-    grid-template-columns: 1fr;
     gap: var(--space-lg);
-    text-align: center;
-  }
-
-  .desc {
-    max-width: 100%;
-    margin: 0 auto;
-  }
-
-  .links {
-    align-items: center;
   }
 
   .whatsappLink {
@@ -144,19 +99,7 @@
     font-size: 0.9rem;
   }
 
-  .logo {
-    justify-content: center;
-  }
-
   .bottom {
     font-size: 0.75rem;
   }
 }
-
-@media (min-width: 769px) and (max-width: 1024px) {
-  .inner {
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-xl);
-  }
-}
-
