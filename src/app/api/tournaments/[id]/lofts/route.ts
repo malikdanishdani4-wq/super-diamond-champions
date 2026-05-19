@@ -3,6 +3,8 @@ import dbConnect from "@/lib/mongodb";
 import { isAuthenticated } from "@/lib/auth";
 import Loft from "@/models/Loft";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }

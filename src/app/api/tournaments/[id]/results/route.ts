@@ -4,6 +4,8 @@ import dbConnect from "@/lib/mongodb";
 import { isAuthenticated } from "@/lib/auth";
 import DayResult from "@/models/DayResult";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -13,20 +15,21 @@ export async function GET(
     const day = request.nextUrl.searchParams.get("day");
     await dbConnect();
 
-    // Try with ObjectId first, fallback to string
-    let tournamentId: mongoose.Types.ObjectId | string;
+    // Query with BOTH ObjectId and string to match results regardless of how they were stored
+    const possibleIds: (mongoose.Types.ObjectId | string)[] = [id];
     try {
-      tournamentId = new mongoose.Types.ObjectId(id);
+      possibleIds.push(new mongoose.Types.ObjectId(id));
     } catch {
-      tournamentId = id;
+      // id is not a valid ObjectId format, just use string
     }
 
-    const query: Record<string, unknown> = { tournamentId };
+    const query: Record<string, unknown> = { tournamentId: { $in: possibleIds } };
     if (day) query.dayNumber = parseInt(day);
 
     const results = await DayResult.find(query)
       .populate("loftId")
-      .sort({ position: 1 });
+      .sort({ position: 1 })
+      .lean();
 
     return Response.json(results);
   } catch (error) {
@@ -47,6 +50,14 @@ export async function POST(
     await dbConnect();
     const body = await request.json();
 
+    // Convert tournamentId to ObjectId for consistent storage
+    let tournamentId: mongoose.Types.ObjectId | string;
+    try {
+      tournamentId = new mongoose.Types.ObjectId(id);
+    } catch {
+      tournamentId = id;
+    }
+
     // Auto-calculate totalDayDuration from pigeon landing times only
     // (Brave child is a separate pigeon and NOT included in the total)
     let totalSeconds = 0;
@@ -65,9 +76,13 @@ export async function POST(
     const totalDayDuration = `${h.toString().padStart(2, "0")}:${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
 
     // Upsert — update if exists, create if not
+    // Search with $in to find existing records stored as either string or ObjectId
+    const possibleIds: (mongoose.Types.ObjectId | string)[] = [id];
+    try { possibleIds.push(new mongoose.Types.ObjectId(id)); } catch { /* ignore */ }
+
     const result = await DayResult.findOneAndUpdate(
-      { tournamentId: id, loftId: body.loftId, dayNumber: body.dayNumber },
-      { ...body, tournamentId: id, totalDayDuration },
+      { tournamentId: { $in: possibleIds }, loftId: body.loftId, dayNumber: body.dayNumber },
+      { ...body, tournamentId, totalDayDuration },
       { upsert: true, new: true }
     );
 
