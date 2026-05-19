@@ -154,19 +154,20 @@
 .mobileLangBtn {
   padding: var(--space-sm) var(--space-lg);
   border-radius: var(--radius-full);
-  background: var(--glass-bg);
+  background: var(--bg-tertiary);
   border: 1px solid var(--glass-border);
   font-size: 0.95rem;
   font-weight: 600;
   cursor: pointer;
   transition: all var(--transition-fast);
-  color: var(--gold);
+  color: var(--text-primary);
   white-space: nowrap;
 }
 
 .mobileLangBtn:hover {
-  background: var(--glass-hover);
+  background: var(--bg-secondary);
   border-color: var(--gold);
+  color: var(--gold);
 }
 
 /* Hamburger */
@@ -259,6 +260,12 @@
   padding: var(--space-sm) var(--space-lg);
   font-size: 0.95rem;
   white-space: nowrap;
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+.mobileActions .themeBtn:hover {
+  background: var(--bg-secondary);
 }
 
 /* Responsive */
