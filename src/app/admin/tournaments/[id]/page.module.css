@@ -95,9 +95,10 @@
   .title { font-size: 1.2rem; }
   .tabs { gap: 0; }
   .tab { padding: var(--space-sm) var(--space-md); font-size: 0.8rem; }
-  .pigeonGrid { grid-template-columns: repeat(3, 1fr); }
+  .pigeonGrid { grid-template-columns: repeat(2, 1fr); gap: var(--space-sm); }
+  .pigeonField input { padding: var(--space-sm) var(--space-xs); font-size: 0.82rem; min-width: 0; }
   .loftGrid { grid-template-columns: repeat(2, 1fr); }
-  .resultEditor { padding: var(--space-md); }
+  .resultEditor { padding: var(--space-md); overflow-x: hidden; }
   .resultActions { flex-direction: column; }
   .resultActions button,
   .resultActions .btn { width: 100%; text-align: center; justify-content: center; }
@@ -106,8 +107,12 @@
 }
 
 @media (max-width: 480px) {
-  .pigeonGrid { grid-template-columns: repeat(2, 1fr); }
+  .pigeonGrid { grid-template-columns: 1fr; }
+  .pigeonField input { font-size: 0.9rem; padding: var(--space-sm); }
   .loftGrid { grid-template-columns: 1fr 1fr; }
+  .loftCard { padding: var(--space-md); }
+}
+
   .loftCard { padding: var(--space-md); }
 }
 
