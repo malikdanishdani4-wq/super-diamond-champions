@@ -5,6 +5,7 @@ import { isAuthenticated } from "@/lib/auth";
 import DayResult from "@/models/DayResult";
 
 export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export async function GET(
   request: NextRequest,
@@ -15,21 +16,57 @@ export async function GET(
     const day = request.nextUrl.searchParams.get("day");
     await dbConnect();
 
-    // Query with BOTH ObjectId and string to match results regardless of how they were stored
-    const possibleIds: (mongoose.Types.ObjectId | string)[] = [id];
+    // Build query — try ObjectId first, then string fallback
+    let objectId: mongoose.Types.ObjectId | null = null;
     try {
-      possibleIds.push(new mongoose.Types.ObjectId(id));
+      objectId = new mongoose.Types.ObjectId(id);
     } catch {
-      // id is not a valid ObjectId format, just use string
+      // not a valid ObjectId format
     }
 
-    const query: Record<string, unknown> = { tournamentId: { $in: possibleIds } };
-    if (day) query.dayNumber = parseInt(day);
+    const buildQuery = (tid: mongoose.Types.ObjectId | string) => {
+      const q: Record<string, unknown> = { tournamentId: tid };
+      if (day) q.dayNumber = parseInt(day);
+      return q;
+    };
 
-    const results = await DayResult.find(query)
-      .populate("loftId")
-      .sort({ position: 1 })
-      .lean();
+    // First try with ObjectId (matches the schema type)
+    let results: unknown[] = [];
+    if (objectId) {
+      results = await DayResult.find(buildQuery(objectId))
+        .populate("loftId")
+        .sort({ position: 1 })
+        .lean();
+    }
+
+    // Fallback: query directly via native driver to bypass Mongoose casting
+    // This handles cases where tournamentId was stored as a string
+    if (results.length === 0) {
+      const nativeQuery: Record<string, unknown> = { tournamentId: id };
+      if (day) nativeQuery.dayNumber = parseInt(day);
+
+      const db = mongoose.connection.db;
+      if (db) {
+        const nativeResults = await db
+          .collection("dayresults")
+          .find(nativeQuery)
+          .sort({ position: 1 })
+          .toArray();
+
+        if (nativeResults.length > 0) {
+          // Manually populate loftId
+          const Loft = mongoose.models.Loft;
+          const loftIds = nativeResults.map((r) => r.loftId).filter(Boolean);
+          const lofts = await Loft.find({ _id: { $in: loftIds } }).lean();
+          const loftMap = new Map(lofts.map((l: Record<string, unknown>) => [String(l._id), l]));
+
+          results = nativeResults.map((r) => ({
+            ...r,
+            loftId: loftMap.get(String(r.loftId)) || r.loftId,
+          }));
+        }
+      }
+    }
 
     return Response.json(results);
   } catch (error) {
@@ -50,7 +87,7 @@ export async function POST(
     await dbConnect();
     const body = await request.json();
 
-    // Convert tournamentId to ObjectId for consistent storage
+    // Convert tournamentId to ObjectId for consistent storage (matches schema)
     let tournamentId: mongoose.Types.ObjectId | string;
     try {
       tournamentId = new mongoose.Types.ObjectId(id);
@@ -76,12 +113,8 @@ export async function POST(
     const totalDayDuration = `${h.toString().padStart(2, "0")}:${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
 
     // Upsert — update if exists, create if not
-    // Search with $in to find existing records stored as either string or ObjectId
-    const possibleIds: (mongoose.Types.ObjectId | string)[] = [id];
-    try { possibleIds.push(new mongoose.Types.ObjectId(id)); } catch { /* ignore */ }
-
     const result = await DayResult.findOneAndUpdate(
-      { tournamentId: { $in: possibleIds }, loftId: body.loftId, dayNumber: body.dayNumber },
+      { tournamentId, loftId: body.loftId, dayNumber: body.dayNumber },
       { ...body, tournamentId, totalDayDuration },
       { upsert: true, new: true }
     );
@@ -92,3 +125,4 @@ export async function POST(
     return Response.json({ error: "Failed to save result" }, { status: 500 });
   }
 }
+
