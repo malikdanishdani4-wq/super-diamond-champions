@@ -54,15 +54,9 @@ export default function Home() {
                 <br />
                 <span className={styles.heroAccent}>{t("hero.title2")}</span>
               </h1>
-              <p className={styles.heroDesc}>
-                {t("hero.desc")}
-              </p>
               <div className={styles.heroCta}>
                 <a href="/tournaments" className="btn btn-primary">
                   {t("hero.viewTournaments")}
-                </a>
-                <a href="/about" className="btn btn-secondary">
-                  {t("hero.learnMore")}
                 </a>
               </div>
             </div>
