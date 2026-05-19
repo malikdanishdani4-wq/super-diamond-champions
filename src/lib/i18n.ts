@@ -93,6 +93,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     "results.noResults": "No results entered yet. Results will appear here once the admin enters competition data.",
     "results.noDayResults": "No results for this day yet.",
     "results.dayCompetition": "day Championship",
+    "results.completeResult": "Complete Result",
 
     // CTA
     "cta.title": "Ready to Track Your Championship?",
@@ -228,6 +229,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     "results.noResults": "ابھی تک کوئی نتائج درج نہیں کیے گئے۔ ایڈمن کے نتائج درج کرنے کے بعد یہاں ظاہر ہوں گے۔",
     "results.noDayResults": "اس دن کے لیے ابھی تک کوئی نتائج نہیں۔",
     "results.dayCompetition": "روزہ چمپئین شپ",
+    "results.completeResult": "مکمل نتائج",
 
     // CTA
     "cta.title": "اپنی چمپئین شپ ٹریک کرنے کے لیے تیار ہیں؟",

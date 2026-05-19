@@ -80,6 +80,7 @@ export default function TournamentDetailPage({
   const [lofts, setLofts] = useState<Loft[]>([]);
   const [results, setResults] = useState<DayResult[]>([]);
   const [activeDay, setActiveDay] = useState<number | "total">(1);
+  const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -407,8 +408,108 @@ export default function TournamentDetailPage({
                 )
               )}
             </div>
+            
+            {/* ── Complete Result Button ────────────────── */}
+            <div className={styles.completeBtnWrapper}>
+              <button className={styles.completeBtn} onClick={() => setShowModal(true)}>
+                {tr("results.completeResult")}
+              </button>
+            </div>
           </div>
         </section>
+
+        {/* ── Complete Result Modal ─────────────────── */}
+        {showModal && (
+          <div className={styles.modalOverlay} onClick={() => setShowModal(false)}>
+            <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+              <div className={styles.modalHeader}>
+                <h3>{tr("results.completeResult")}</h3>
+                <button className={styles.modalClose} onClick={() => setShowModal(false)}>✕</button>
+              </div>
+              <div className={styles.modalBody}>
+                {activeDay === "total" ? (
+                  totalRows.length > 0 ? (
+                    <div className={styles.cardsGrid}>
+                      {totalRows.map((row, idx) => (
+                        <div key={idx} className={`${styles.resultCard} ${idx < 3 ? styles[`cardRank${idx + 1}`] : ""}`}>
+                          <div className={styles.cardHeader}>
+                            <span className={`${styles.positionBadge} ${idx < 3 ? styles[`pos${idx + 1}`] : ""}`}>
+                              {row.position}
+                            </span>
+                            <div className={styles.cardInfo}>
+                              <div className={styles.cardLoft}>{tr("results.loft")}: {row.loft?.loftNumber || "-"}</div>
+                              <div className={styles.cardNameEn}>{isUrdu ? (row.loft?.ownerNameUrdu || row.loft?.ownerName || "-") : (row.loft?.ownerName || "-")}</div>
+                              <div className={styles.cardNameUr}>{isUrdu ? row.loft?.ownerName || "" : row.loft?.ownerNameUrdu || ""}</div>
+                            </div>
+                          </div>
+                          <div className={styles.cardTimesGrid}>
+                            {row.dayTotals.map((dt, i) => (
+                              <div key={i} className={styles.cardTimeBox}>
+                                <span className={styles.cardTimeLabel}>{tr("results.day")} {i + 1}</span>
+                                <span className={`${styles.cardTimeValue} ${dt === "00:00:00" ? styles.notLanded : ""}`}>{dt === "00:00:00" ? "—" : dt}</span>
+                              </div>
+                            ))}
+                            <div className={styles.cardTimeBox}>
+                              <span className={styles.cardTimeLabel}>{tr("results.brave")}</span>
+                              <span className={`${styles.cardTimeValue} ${row.braveChild === "00:00:00" ? styles.notLanded : ""}`}>{row.braveChild === "00:00:00" ? "—" : row.braveChild}</span>
+                            </div>
+                          </div>
+                          <div className={styles.cardTotal}>
+                            <span>{tr("results.total")}</span>
+                            <strong>{row.totalTime}</strong>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className={styles.noResults}>{tr("results.noResults")}</p>
+                  )
+                ) : (
+                  dayRows.length > 0 ? (
+                    <div className={styles.cardsGrid}>
+                      {dayRows.map((row, idx) => (
+                        <div key={idx} className={`${styles.resultCard} ${idx < 3 ? styles[`cardRank${idx + 1}`] : ""}`}>
+                          <div className={styles.cardHeader}>
+                            <span className={`${styles.positionBadge} ${idx < 3 ? styles[`pos${idx + 1}`] : ""}`}>
+                              {idx + 1}
+                            </span>
+                            <div className={styles.cardInfo}>
+                              <div className={styles.cardLoft}>{tr("results.loft")}: {row.loft?.loftNumber || "-"}</div>
+                              <div className={styles.cardNameEn}>{isUrdu ? (row.loft?.ownerNameUrdu || row.loft?.ownerName || "-") : (row.loft?.ownerName || "-")}</div>
+                              <div className={styles.cardNameUr}>{isUrdu ? row.loft?.ownerName || "" : row.loft?.ownerNameUrdu || ""}</div>
+                            </div>
+                          </div>
+                          <div className={styles.cardTimesGrid}>
+                            {Array.from({ length: tournament.pigeonsPerLoft }, (_, i) => {
+                              const landing = row.pigeonLandings?.find((p) => p.pigeonNumber === i + 1);
+                              const time = landing?.landingTime || "00:00:00";
+                              return (
+                                <div key={i} className={styles.cardTimeBox}>
+                                  <span className={styles.cardTimeLabel}>P{(i + 1).toString().padStart(2, "0")}</span>
+                                  <span className={`${styles.cardTimeValue} ${time === "00:00:00" ? styles.notLanded : ""}`}>{time === "00:00:00" ? "—" : time}</span>
+                                </div>
+                              );
+                            })}
+                            <div className={styles.cardTimeBox}>
+                              <span className={styles.cardTimeLabel}>{tr("results.brave")}</span>
+                              <span className={`${styles.cardTimeValue} ${row.braveChildTime === "00:00:00" ? styles.notLanded : ""}`}>{row.braveChildTime === "00:00:00" ? "—" : row.braveChildTime}</span>
+                            </div>
+                          </div>
+                          <div className={styles.cardTotal}>
+                            <span>{tr("results.total")}</span>
+                            <strong>{row.computedTotal === "00:00:00" ? "—" : row.computedTotal}</strong>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className={styles.noResults}>{tr("results.noDayResults")}</p>
+                  )
+                )}
+              </div>
+            </div>
+          </div>
+        )}
       </main>
       <Footer />
     </>
