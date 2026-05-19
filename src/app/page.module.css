@@ -1,12 +1,11 @@
 /* ── Hero ─────────────────────────────────────────── */
 .hero {
-  min-height: 100vh;
   display: flex;
   align-items: center;
   position: relative;
   overflow-x: clip;
   overflow-y: visible;
-  padding-top: var(--navbar-height);
+  padding: var(--space-xl) 0;
 }
 
 .heroInner {
@@ -413,7 +412,6 @@
 
 @media (max-width: 768px) {
   .hero {
-    min-height: auto;
     padding-bottom: var(--space-xl);
   }
 
@@ -451,10 +449,6 @@
     padding: var(--space-sm) var(--space-xl);
     width: 100%;
     max-width: 280px;
-  }
-
-  .heroVisual {
-    order: -1;
   }
 
   .trophy {
@@ -541,7 +535,6 @@
   }
 
   .hero {
-    min-height: auto;
-    padding-bottom: var(--space-xl);
+    padding-bottom: var(--space-md);
   }
 }

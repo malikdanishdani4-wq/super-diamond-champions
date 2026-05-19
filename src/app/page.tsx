@@ -64,12 +64,6 @@ export default function Home() {
                 </a>
               </div>
             </div>
-            <div className={styles.heroVisual}>
-              <div className={styles.trophyContainer}>
-                <span className={styles.trophy}>🏆</span>
-                <div className={styles.trophyGlow} />
-              </div>
-            </div>
           </div>
           <div className={styles.heroWave} />
         </section>
