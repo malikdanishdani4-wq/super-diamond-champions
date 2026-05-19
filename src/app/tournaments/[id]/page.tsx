@@ -79,7 +79,7 @@ export default function TournamentDetailPage({
   const [tournament, setTournament] = useState<Tournament | null>(null);
   const [lofts, setLofts] = useState<Loft[]>([]);
   const [results, setResults] = useState<DayResult[]>([]);
-  const [activeDay, setActiveDay] = useState<number | "total">("total");
+  const [activeDay, setActiveDay] = useState<number | "total">(1);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 

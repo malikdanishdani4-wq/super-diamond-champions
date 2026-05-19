@@ -1,4 +1,5 @@
 import { type NextRequest } from "next/server";
+import mongoose from "mongoose";
 import dbConnect from "@/lib/mongodb";
 import { isAuthenticated } from "@/lib/auth";
 import DayResult from "@/models/DayResult";
@@ -12,7 +13,15 @@ export async function GET(
     const day = request.nextUrl.searchParams.get("day");
     await dbConnect();
 
-    const query: Record<string, unknown> = { tournamentId: id };
+    // Try with ObjectId first, fallback to string
+    let tournamentId: mongoose.Types.ObjectId | string;
+    try {
+      tournamentId = new mongoose.Types.ObjectId(id);
+    } catch {
+      tournamentId = id;
+    }
+
+    const query: Record<string, unknown> = { tournamentId };
     if (day) query.dayNumber = parseInt(day);
 
     const results = await DayResult.find(query)
