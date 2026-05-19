@@ -1,5 +1,5 @@
 .section {
-  padding: var(--space-3xl) 0;
+  padding: var(--space-3xl) 0 var(--space-xl) 0;
   width: 100%;
 }
 
@@ -40,7 +40,7 @@
 .posterGrid {
   display: flex;
   justify-content: center;
-  align-items: flex-end;
+  align-items: flex-start;
   gap: 1.5cqw;
   position: relative;
   z-index: 1;
@@ -159,6 +159,12 @@
   opacity: 0.9;
 }
 
+@media (max-width: 768px) {
+  .section {
+    padding-bottom: var(--space-md);
+  }
+}
+
 /* Fallback for browsers that don't support container queries perfectly on very small screens */
 @media (max-width: 480px) {
   .posterTitle {
@@ -168,7 +174,7 @@
   
   .posterContainer {
     border-radius: var(--radius-lg);
-    padding-bottom: 8vw;
+    padding-bottom: 4vw;
   }
   
   .memberColumn.featured .enName {
