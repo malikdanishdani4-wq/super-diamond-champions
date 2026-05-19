@@ -1,0 +1,195 @@
+.section {
+  padding: var(--space-3xl) 0;
+  width: 100%;
+}
+
+.posterContainer {
+  container-type: inline-size;
+  container-name: poster;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  background: linear-gradient(135deg, #0a1128 0%, #030816 100%);
+  border-radius: var(--radius-2xl);
+  overflow: hidden;
+  border: 1px solid rgba(245, 166, 35, 0.2);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+  padding: 3cqw 1cqw 5cqw;
+}
+
+.posterGlow {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60cqw;
+  height: 60cqw;
+  background: radial-gradient(circle, rgba(245, 166, 35, 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.posterTitle {
+  text-align: center;
+  font-size: 5cqw;
+  font-weight: 900;
+  color: var(--text-primary);
+  margin-bottom: 4cqw;
+  position: relative;
+  z-index: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  text-shadow: 0 1cqw 2cqw rgba(0,0,0,0.5);
+}
+
+.accent {
+  color: var(--gold);
+}
+
+.posterGrid {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 1.5cqw;
+  position: relative;
+  z-index: 1;
+}
+
+.memberColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.memberColumn.featured {
+  width: 19cqw;
+  z-index: 2;
+}
+
+.memberColumn.regular {
+  width: 13cqw;
+  z-index: 1;
+}
+
+.imageBox {
+  position: relative;
+  width: 100%;
+  border-radius: 1.5cqw;
+  overflow: hidden;
+  border: 0.3cqw solid rgba(255,255,255,0.1);
+  box-shadow: 0 2cqw 4cqw rgba(0,0,0,0.6);
+  margin-bottom: 2cqw;
+  aspect-ratio: 3 / 4;
+}
+
+.memberColumn.featured .imageBox {
+  border-color: var(--gold);
+  border-width: 0.4cqw;
+  box-shadow: 0 1cqw 4cqw rgba(245, 166, 35, 0.4);
+}
+
+.image {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.info {
+  text-align: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.enName {
+  font-size: 1.3cqw;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+  margin-bottom: 0.5cqw;
+  text-shadow: 0 0.5cqw 1cqw rgba(0,0,0,0.8);
+}
+
+.urName {
+  font-size: 1.2cqw;
+  font-weight: 500;
+  color: rgba(255,255,255,0.6);
+  font-family: 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif;
+  line-height: 1;
+  text-shadow: 0 0.5cqw 1cqw rgba(0,0,0,0.8);
+}
+
+.memberColumn.featured .enName {
+  font-size: 1.8cqw;
+  font-weight: 800;
+  color: var(--gold-light);
+}
+
+.memberColumn.featured .urName {
+  font-size: 1.6cqw;
+  color: var(--gold);
+}
+
+.roleWrapper {
+  margin-top: 1cqw;
+  background: linear-gradient(135deg, rgba(245, 166, 35, 0.2), rgba(245, 166, 35, 0.05));
+  border: 0.2cqw solid rgba(245, 166, 35, 0.4);
+  padding: 0.6cqw 1.5cqw;
+  border-radius: 4cqw;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 1cqw 2cqw rgba(0,0,0,0.4);
+}
+
+.enRole {
+  font-size: 0.9cqw;
+  font-weight: 800;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.urRole {
+  font-size: 0.9cqw;
+  color: var(--gold);
+  font-family: 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif;
+  margin-top: 0.2cqw;
+}
+
+/* Fallback for browsers that don't support container queries perfectly on very small screens */
+@media (max-width: 480px) {
+  .posterTitle {
+    font-size: 6vw;
+    margin-bottom: 6vw;
+  }
+  
+  .posterContainer {
+    border-radius: var(--radius-lg);
+    padding-bottom: 8vw;
+  }
+  
+  .memberColumn.featured .enName {
+    font-size: 2vw;
+  }
+  
+  .memberColumn.featured .urName {
+    font-size: 1.8vw;
+  }
+  
+  .enName {
+    font-size: 1.5vw;
+  }
+  
+  .urName {
+    font-size: 1.4vw;
+  }
+  
+  .enRole, .urRole {
+    font-size: 1vw;
+  }
+}

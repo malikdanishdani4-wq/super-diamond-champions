@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Navbar from "@/components/ui/Navbar";
 import Footer from "@/components/ui/Footer";
-import OrganizingTeam from "@/components/ui/OrganizingTeam";
+import AmazingTeam from "@/components/ui/AmazingTeam";
 import { useLanguage } from "@/context/LanguageContext";
 import styles from "./page.module.css";
 
@@ -42,6 +42,9 @@ export default function Home() {
     <>
       <Navbar />
       <main>
+        {/* ── Amazing Team ───────────────────────────── */}
+        <AmazingTeam />
+
         {/* ── Hero Section ──────────────────────────── */}
         <section className={styles.hero}>
           <div className={`container ${styles.heroInner}`}>
@@ -158,9 +161,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-
-        {/* ── Organizing Team ────────────────────────── */}
-        <OrganizingTeam />
 
         {/* ── CTA Section ──────────────────────────── */}
         <section className={styles.ctaSection}>
