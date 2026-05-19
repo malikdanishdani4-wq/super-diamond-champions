@@ -31,18 +31,7 @@
   z-index: 0;
 }
 
-.posterTitle {
-  text-align: center;
-  font-size: 5cqw;
-  font-weight: 900;
-  color: var(--text-primary);
-  margin-bottom: 4cqw;
-  position: relative;
-  z-index: 1;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  text-shadow: 0 1cqw 2cqw rgba(0,0,0,0.5);
-}
+
 
 .accent {
   color: var(--gold);
@@ -70,7 +59,7 @@
 }
 
 .memberColumn.regular {
-  width: 13cqw;
+  width: 12cqw;
   z-index: 1;
 }
 
@@ -108,7 +97,7 @@
 .enName {
   font-size: 1.3cqw;
   font-weight: 700;
-  color: var(--text-primary);
+  color: #ffffff;
   line-height: 1.2;
   margin-bottom: 0.5cqw;
   text-shadow: 0 0.5cqw 1cqw rgba(0,0,0,0.8);
@@ -117,7 +106,7 @@
 .urName {
   font-size: 1.2cqw;
   font-weight: 500;
-  color: rgba(255,255,255,0.6);
+  color: #cccccc;
   font-family: 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif;
   line-height: 1;
   text-shadow: 0 0.5cqw 1cqw rgba(0,0,0,0.8);
@@ -161,6 +150,15 @@
   margin-top: 0.2cqw;
 }
 
+.contactNum {
+  font-size: 0.9cqw;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.05em;
+  margin-top: 0.4cqw;
+  opacity: 0.9;
+}
+
 /* Fallback for browsers that don't support container queries perfectly on very small screens */
 @media (max-width: 480px) {
   .posterTitle {
@@ -189,7 +187,7 @@
     font-size: 1.4vw;
   }
   
-  .enRole, .urRole {
+  .enRole, .urRole, .contactNum {
     font-size: 1vw;
   }
 }

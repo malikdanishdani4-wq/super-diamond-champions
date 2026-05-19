@@ -6,6 +6,13 @@ import { useLanguage } from "@/context/LanguageContext";
 
 const posterMembers = [
   {
+    id: "umair-ahmed",
+    type: "featured",
+    enName: "Ustad Umair Ahmed",
+    urName: "استاد عمیر احمد",
+    image: "/images/team/Ustad Umair Ahmed.jpeg",
+  },
+  {
     id: "mansoor-qureshi",
     type: "regular",
     enName: "Ustad Mansoor Qureshi",
@@ -18,22 +25,6 @@ const posterMembers = [
     enName: "Ustad Khawaja Asif",
     urName: "استاد خواجہ آصف",
     image: "/images/team/Ustad Khawaja Asif.jpeg",
-  },
-  {
-    id: "malik-danish",
-    type: "featured",
-    enName: "Malik Danish",
-    urName: "ملک دانش",
-    enRole: "Organizer",
-    urRole: "آرگنائزر",
-    image: "/images/team/Malik Danish - Organizer.jpeg",
-  },
-  {
-    id: "umair-ahmed",
-    type: "featured",
-    enName: "Ustad Umair Ahmed",
-    urName: "استاد عمیر احمد",
-    image: "/images/team/Ustad Umair Ahmed.jpeg",
   },
   {
     id: "iftikhar-jani",
@@ -49,6 +40,16 @@ const posterMembers = [
     urName: "خلیفہ ملک راشد",
     image: "/images/team/Khalifa Malik Rashid.jpeg",
   },
+  {
+    id: "malik-danish",
+    type: "featured",
+    enName: "Malik Danish",
+    urName: "ملک دانش",
+    enRole: "Organizer",
+    urRole: "آرگنائزر",
+    contact: "03145208143",
+    image: "/images/team/Malik Danish - Organizer.jpeg",
+  },
 ];
 
 export default function AmazingTeam() {
@@ -60,10 +61,7 @@ export default function AmazingTeam() {
         <div className={styles.posterContainer}>
           <div className={styles.posterGlow} />
           
-          <h2 className={styles.posterTitle}>
-            Amazing <span className={styles.accent}>Team</span>
-          </h2>
-          
+
           <div className={styles.posterGrid}>
             {posterMembers.map((member) => (
               <div 
@@ -87,6 +85,9 @@ export default function AmazingTeam() {
                     <div className={styles.roleWrapper}>
                       <span className={styles.enRole}>{member.enRole}</span>
                       <span className={styles.urRole}>{member.urRole}</span>
+                      {member.contact && (
+                        <span className={styles.contactNum}>{member.contact}</span>
+                      )}
                     </div>
                   )}
                 </div>
