@@ -110,7 +110,3 @@
   .loftGrid { grid-template-columns: 1fr; }
   .loftCard { padding: var(--space-md); }
 }
-
-  .loftCard { padding: var(--space-md); }
-}
-
